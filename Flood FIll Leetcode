@@ -1,0 +1,16 @@
+class Solution:
+    def dfs(self,sr,sc,currEle,color,dupMat,image):
+        n=len(image)
+        m=len(image[0]) 
+        dupMat[sr][sc]=color 
+        for r,c in [[-1,0],[0,1],[1,0],[0,-1]]:
+            nRow=sr+r 
+            nCol=sc+c 
+            if(nRow>=0 and nRow<n and nCol>=0 and nCol<m and currEle==image[nRow][nCol] and color!=dupMat[nRow][nCol]):
+                dupMat[nRow][nCol]=color
+                self.dfs(nRow,nCol,currEle,color,dupMat,image) 
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        currEle=image[sr][sc] 
+        dupMat=image.copy() 
+        self.dfs(sr,sc,currEle,color,dupMat,image)
+        return dupMat 
